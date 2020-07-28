@@ -20,7 +20,7 @@ public class Member {
     @Embedded
     private Address address;
 
-    // 연관관계의 주인이 아닌 order의 member을 보여주는 거울.
+    // 연관관계의 주인이 아닌 order의 member를 보여주는 거울.
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
 
