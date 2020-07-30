@@ -11,7 +11,8 @@ import javax.persistence.*;
 @Getter @Setter
 public class OrderItem {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "order_item_id")
     private Long id;
 
@@ -25,4 +26,31 @@ public class OrderItem {
 
     private int orderPrice;
     private int count;
+
+    /**
+     *
+     *
+     */
+
+    public static OrderItem createOrderItem (Item item, int orderPrice, int count){
+        OrderItem orderItem = new OrderItem();
+        orderItem.setItem(item);
+        orderItem.setOrderPrice(orderPrice);
+        orderItem.setCount(count);
+
+        item.removeStock(count);
+
+        return orderItem;
+    }
+    /**
+     * Business Logic
+     * Cancel OrderItem
+     */
+    public void cancel() {
+        this.getItem().addStock(count);
+    }
+
+    public int getTotalPrice() {
+        return getOrderPrice() * getCount();
+    }
 }

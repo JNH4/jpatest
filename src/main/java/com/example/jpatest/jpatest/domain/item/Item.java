@@ -2,6 +2,7 @@ package com.example.jpatest.jpatest.domain.item;
 
 
 import com.example.jpatest.jpatest.domain.Category;
+import com.example.jpatest.jpatest.domain.exception.NotEnoughStockException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,8 +25,22 @@ public abstract class Item {
     private int price;
     private int stockQuantity;
 
-
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
+
+    /**
+     * increase stock
+     * @param quantity
+     */
+    public void addStock(int quantity){
+        this.stockQuantity += quantity;
+    }
+
+    public void removeStock(int quantity){
+        int restStock = this.stockQuantity - quantity;
+        if(restStock < 0) throw new NotEnoughStockException("It's not enough");
+
+        stockQuantity = restStock;
+    }
 
 }
