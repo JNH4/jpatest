@@ -8,9 +8,12 @@ import com.example.jpatest.jpatest.domain.item.Item;
 import com.example.jpatest.jpatest.repository.ItemRepository;
 import com.example.jpatest.jpatest.repository.MemberRepository;
 import com.example.jpatest.jpatest.repository.OrderRepository;
+import com.example.jpatest.jpatest.repository.OrderSearch;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -61,5 +64,9 @@ public class OrderService {
         //서비스 단에서 쿼리를 통해 비즈니스 로직을 전개하는 방식을 트랜잭션 스크립트 패턴이라고 한다.
         //둘 중 상황에 맞는 패턴을 선택하여 개발하면 됨.
         order.cancelOrder();
+    }
+
+    public List<Order> findOrders(OrderSearch orderSearch) {
+        return orderRepository.findAllByCriteria(orderSearch);
     }
 }
