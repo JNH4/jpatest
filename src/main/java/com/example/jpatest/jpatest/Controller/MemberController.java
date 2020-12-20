@@ -4,6 +4,7 @@ import com.example.jpatest.jpatest.domain.Address;
 import com.example.jpatest.jpatest.domain.Member;
 import com.example.jpatest.jpatest.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
